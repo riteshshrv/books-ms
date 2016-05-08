@@ -3,13 +3,14 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
+  config.vm.box_check_update = false
   if (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
     config.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=600"]
   else
     config.vm.synced_folder ".", "/vagrant"
   end
   config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
+    v.memory = 1024
   end
   config.vm.define :dev do |dev|
     dev.vm.network "private_network", ip: "10.100.199.200"
